@@ -39,7 +39,7 @@
                             </i>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <el-dropdown-item>注销</el-dropdown-item>
+                                    <el-dropdown-item v-on:click="logout()">注销</el-dropdown-item>
                                 </el-dropdown-menu>
                             </template>
                         </el-dropdown>
@@ -63,7 +63,7 @@
                     </el-menu>
                 </el-aside>
                 <el-main>
-                    <iframe id="main" name="main" src="https://www.imooc.com" style="width: 100%;height: 95%; border: 0px"></iframe>
+                    <iframe id="main" name="main" src="leave_form.html" style="width: 100%;height: 95%; border: 0px"></iframe>
                 </el-main>
             </el-container>
         </el-container>
@@ -84,18 +84,20 @@
                 showPage(url) {
                     document.getElementById("main").src=url;
                 }
+                ,logout() {
+                    sessionStorage.clear();
+                    window.location.href="/login.html";
+                }
             }
             ,mounted(){
                 const objApp = this;
-                axios.get("/api/user_info?uid="+sessionStorage.uid + "&eid" + sessionStorage.eid)
+                axios.get("/api/user_info?uid="+sessionStorage.uid + "&eid=" + sessionStorage.eid)
                     .then(function (response) {
                         const json = response.data;
-
                         json.data.nodeList.forEach(function (item) {
                             objApp.nodeList.push(item);
                             objApp.employee = json.data.employee;
                         })
-                        console.info(objApp.nodeList);
                     })
             }
         };
