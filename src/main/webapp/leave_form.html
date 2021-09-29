@@ -95,6 +95,13 @@
                 }
             }
         }
+        ,mounted() {
+            const objApp = this;
+            axios.get("/api/user_info?uid=" + sessionStorage.uid + "&eid=" + sessionStorage.eid)
+                .then(function (response) {
+                    console.info(response);
+                })
+        }
     };
     ElementPlus.locale(ElementPlus.lang.zhCn);
     const app = Vue.createApp(Main);

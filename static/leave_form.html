@@ -76,6 +76,7 @@
     var Main = {
         data() {
             return {
+                employee:{},
                 form: {
                     formType: "1",
                     timeRange: "",
@@ -94,6 +95,13 @@
                     ]
                 }
             }
+        }
+        ,mounted() {
+            const objApp = this;
+            axios.get("/api/user_info?uid=" + sessionStorage.uid + "&eid=" + sessionStorage.eid)
+            .then(function (response) {
+                console.info(response);
+            })
         }
     };
     ElementPlus.locale(ElementPlus.lang.zhCn);
