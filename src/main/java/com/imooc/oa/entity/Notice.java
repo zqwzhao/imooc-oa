@@ -19,6 +19,7 @@ public class Notice {
     public Notice(Long receiverId, String content) {
         this.receiverId = receiverId;
         this.content = content;
+        this.createTime = new Date();
     }
 
     public Long getNoticeId() {

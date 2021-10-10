@@ -1,7 +1,9 @@
 package com.imooc.oa.controller;
 
+import com.imooc.oa.entity.Department;
 import com.imooc.oa.entity.Employee;
 import com.imooc.oa.entity.Node;
+import com.imooc.oa.service.DepartmentService;
 import com.imooc.oa.service.EmployeeService;
 import com.imooc.oa.service.RbacService;
 import com.imooc.oa.utils.ResponseUtils;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class UserInfoServlet extends HttpServlet {
     private RbacService rbacService = new RbacService();
     private EmployeeService employeeService = new EmployeeService();
+    private DepartmentService departmentService = new DepartmentService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -52,9 +55,9 @@ public class UserInfoServlet extends HttpServlet {
             }
         }
         Employee employee = employeeService.selectById(Long.parseLong(eid));
+        Department department = departmentService.selectById(employee.getDepartmentId());
 
-
-        String json = new ResponseUtils().put("nodeList",treeList).put("employee",employee).toJsonString();
+        String json = new ResponseUtils().put("nodeList",treeList).put("employee",employee).put("department",department).toJsonString();
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().println(json);
     }

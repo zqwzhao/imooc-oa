@@ -2,6 +2,8 @@ package com.imooc.oa.mapper;
 
 import com.imooc.oa.entity.Notice;
 
+import java.util.List;
+
 /**
  * @author : [zqwzh]
  * @version : [v1.0]
@@ -9,4 +11,6 @@ import com.imooc.oa.entity.Notice;
  */
 public interface NoticeMapper {
     public void insert(Notice notice);
+
+    public List<Notice> selectByReceiverId(Long receiverId);
 }
